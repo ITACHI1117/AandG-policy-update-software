@@ -4,9 +4,10 @@ import time
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
+#
+# from Niid_Correction import correct_regNoNiid
 
-from Niid_Correction import correct_regNoNiid
-from Write_Logs import write_logs
+from Write_logs import write_logs
 
 
 # Main Function
