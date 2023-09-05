@@ -6,7 +6,12 @@ from ttkbootstrap.toast import ToastNotification
 from Niid_Reg_Correction import correct_regNoNiid
 from Reg_Update import correct_regNo
 
-root = tb.Window(themename="cyborg")
+
+LightTheme = ["pulse","default","default","white"]
+DarkTheme = ["cyborg","dark","default","black"]
+Theme = DarkTheme
+
+root = tb.Window(themename=Theme[0])
 # root = Tk()
 root.title("A&G Policy Updater")
 root.iconbitmap("./A&GICON.ico")
@@ -89,13 +94,14 @@ root.rowconfigure(2, weight=2)
 
 
 #Side bar
-my_frame = tb.Frame(root, bootstyle="dark" , height=300)
+my_frame = customtkinter.CTkFrame(root, fg_color=Theme[3],  height=300)
 my_frame.grid(row=0, column=0, rowspan=4, sticky=NS)
-my_frame.grid_rowconfigure(4, weight=2)
+root.rowconfigure(4, weight=1)
+
 
 
 #Side bar Label
-my_label = tb.Label(my_frame, text="A&G Policy\nUpdater", bootstyle="inverse-dark", font=("Helvetica", 18) )
+my_label = tb.Label(my_frame, text="A&G Policy\nUpdater", bootstyle=Theme[2], font=("Helvetica", 18) )
 my_label.grid(pady=30,padx=(20, 20))
 
 # Scratch card button
@@ -105,12 +111,22 @@ scratch_button.grid(pady=10, padx=0)
 epin_button = tb.Button(my_frame, text="E-PIN", command=change_platform_epin, bootstyle="danger ", width=20)
 epin_button.grid(pady=10, padx=0)
 
+# if Theme == LightTheme:
+#     # THEME button
+#     epin_button = tb.Button(root, text="Dark", command=change_theme, bootstyle="danger ", width=20)
+#     epin_button.grid( row=3,pady=10, padx=10, sticky=SE)
+# else:
+#     # THEME button
+#     epin_button = tb.Button(my_frame, text="Light", command=change_theme, bootstyle="danger ", width=20)
+#     epin_button.grid(pady=10, padx=0)
+
+
 #TOP frame
-verify = tb.Frame(root, bootstyle="dark",  height=30,)
+verify = customtkinter.CTkFrame(root, fg_color=Theme[3], border_width=2,  height=30,)
 verify.grid(padx=5, pady=10,  column=2, row=1, sticky=NSEW)
 
 #top fram label
-top_frame_label = tb.Label(verify,text="Scratch Card Platform", bootstyle="dark inverse", font=("Poppins", 15))
+top_frame_label = tb.Label(verify,text="Scratch Card Platform", bootstyle=Theme[2], font=("Poppins", 15))
 top_frame_label.pack(pady=5)
 
 
@@ -122,7 +138,7 @@ Policy_frame.columnconfigure((0,1), weight=2)
 
 
 #frme
-reg_frame = customtkinter.CTkFrame(Policy_frame, fg_color="black",  border_width=1)
+reg_frame = customtkinter.CTkFrame(Policy_frame, fg_color=Theme[3],  border_width=2)
 reg_frame.grid(padx=5, pady=5, column=0, row=0, sticky=NSEW)
 
 label_radio_group = tb.Label(master=reg_frame, text="Reg Corrections")
@@ -143,7 +159,7 @@ sidebar_button_1 = tb.Button(reg_frame, bootstyle="danger", text="Update",width=
 sidebar_button_1.grid(row=4, column=3, padx=0, pady=10, )
 
 #frme
-f2 = customtkinter.CTkFrame(Policy_frame, fg_color="black" , border_width=2)
+f2 = customtkinter.CTkFrame(Policy_frame, fg_color=Theme[3] , border_width=2)
 f2.grid(padx=5, pady=5, column=1, row=0, sticky=NSEW)
 
 label_radio_group = tb.Label(master=f2, text="Chassis Corrections")
@@ -165,7 +181,7 @@ sidebar_button_1.grid(row=5, column=3, padx=0, pady=10, )
 
 
 #frme
-f2 = customtkinter.CTkFrame(Policy_frame, fg_color="black" , border_width=2)
+f2 = customtkinter.CTkFrame(Policy_frame, fg_color=Theme[3], border_width=2)
 f2.grid(padx=5, pady=5, column=0, row=1, sticky=NSEW)
 
 label_radio_group = tb.Label(master=f2, text="Reg and Chassis Corrections")
@@ -191,7 +207,7 @@ sidebar_button_1 = tb.Button(f2, text="Update", bootstyle="danger",width=30)
 sidebar_button_1.grid(row=5, column=3, padx=0, pady=10, )
 
 #frme
-f2 = customtkinter.CTkFrame(Policy_frame, fg_color="black" , border_width=2)
+f2 = customtkinter.CTkFrame(Policy_frame, fg_color=Theme[3], border_width=2)
 f2.grid(padx=5, pady=5, column=1, row=1, sticky=NSEW)
 
 label_radio_group = tb.Label(master=f2, text="Change Name")
@@ -218,7 +234,7 @@ sidebar_button_1.grid(row=5, column=3, padx=0, pady=10, )
 
 
 #Verify Policy
-verify = customtkinter.CTkFrame(root, fg_color="black" , height=30, border_width=1)
+verify = customtkinter.CTkFrame(root, fg_color=Theme[3], height=30, border_width=1)
 verify.grid(padx=5, pady=5, column=2, row=3, sticky=EW)
 
 reg_policy_number = tb.Label(master=verify, text="Verify Policy")
