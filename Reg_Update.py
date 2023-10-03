@@ -23,15 +23,15 @@ def correct_regNo(policy_number, reg_number,platform_data):
     correct_regNo = reg_number
 
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless=new")
-    options.add_argument("--start-maximized")
+    # options.add_argument("--headless=new")
+    # options.add_argument("--start-maximized")
     options.add_argument('--log-level=3')
 
     # Provide the path of chromedriver present on your system.
     path = (r"chromedriver.exe")
     service = Service(executable_path=path)
     driver = webdriver.Chrome(options=options, service=service)
-    # driver.set_window_size(1920, 1080)
+    driver.set_window_size(1024, 800)
 
     # Send a get request to the url
     driver.get(platform_data[0])
@@ -110,8 +110,8 @@ def correct_regNo(policy_number, reg_number,platform_data):
     if errobox_value == 'block':
         ERROR_MESSAGE = driver.find_element(
             by="xpath", value='//div[@class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable ui-dialog-buttons"][2]/div[2]').text
-        print(f"error message ={ERROR_MESSAGE}")
-        return ERROR_MESSAGE
+        print(f"error message ={ERROR_MESSAGE}  policy number = {policy}  regnumber = {reg_number}")
+        return ERROR_MESSAGE,policy,correct_regNo
     else:
         print("policy found")
 
@@ -121,9 +121,12 @@ def correct_regNo(policy_number, reg_number,platform_data):
                                      value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary panel-heading"]/div['
                                            '8]/div[3]/input').get_attribute("value")
     if valueofReg == "":
+        error_message = "There was an error try again later"
         print("There was an error try again later")
         driver.close()
         driver.quit()
+        return error_message
+
     else:
         print("no error")
 
@@ -132,7 +135,7 @@ def correct_regNo(policy_number, reg_number,platform_data):
                                      value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary panel-heading"]/div['
                                      '8]/div[3]/input')
     Reg_number = value_text.get_attribute("value")
-    print(Reg_number)
+    # print(Reg_number)
 
     time.sleep(0.2)
     # Editing the Reg Number
@@ -161,7 +164,7 @@ def correct_regNo(policy_number, reg_number,platform_data):
     # checking if the screen is loading
     cssValue = driver.find_element(
         by="xpath", value='//div[4]').value_of_css_property('display')
-    print(cssValue)
+
     # Waiting for Screen to load before Updating the policy
     while cssValue == 'block':
         cssValue = driver.find_element(
@@ -177,13 +180,13 @@ def correct_regNo(policy_number, reg_number,platform_data):
     OLD_REGNUMBER = Reg_number
 
     POLICY_DETAILS = [f"POLICY NUMBER: {POLICY_NUMBER}", f"POLICY NUMBER: {NEW_REGNUMBER}", f"POLICY NUMBER: {OLD_REGNUMBER}"]
-    print(POLICY_DETAILS)
+    # print(POLICY_DETAILS)
 
     # calling the write log function to write the log files
     write_logs(POLICY_NUMBER,NEW_REGNUMBER,OLD_REGNUMBER,None,None,None,None,"Reg_Update")
-    print("done")
+    # print("done")
     # Quits the driver
     driver.close()
     driver.quit()
 
-    return Reg_number
+    return Reg_number,policy,correct_regNo

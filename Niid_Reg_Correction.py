@@ -18,7 +18,7 @@ def correct_regNoNiid(policy_number, reg_number, incorrect_regnumber):
     incorrect_regNo = incorrect_regnumber  # reg_number
 
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless=new")
+    # options.add_argument("--headless=new")
     # options.add_argument("--start-maximized")
     options.add_argument('--log-level=3')
 
@@ -26,7 +26,7 @@ def correct_regNoNiid(policy_number, reg_number, incorrect_regnumber):
     path = (r"chromedriver.exe")
     service = Service(executable_path=path)
     driver = webdriver.Chrome(options=options, service=service)
-    # driver.set_window_size(1920, 1080)
+    driver.set_window_size(1024, 800)
 
     # Send a get request to the url
     driver.get('https://niid.org/default.aspx')
