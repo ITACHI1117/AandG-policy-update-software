@@ -5,6 +5,7 @@ import customtkinter
 from ttkbootstrap.toast import ToastNotification
 from tkinter import messagebox
 
+from Change_Name import change_name
 from Chassis_Update import correct_chassisNO
 from Niid_Reg_Correction import correct_regNoNiid
 from Niid_RegandChassis_correction import correct_reg_and_chassisNo_Niid
@@ -128,50 +129,55 @@ def run_program():
 
     #Chassis only correction function
     def update_chassis_update_only():
-        global Running_program
-        Running_program += 1
-        runing_programs_button.config(text=Running_program, state="enabled")
-
-        if Running_program == 5:
-            Reg_update_button.config(state="disabled")
-
-        # get Entry data
-
-        CHASSIS_POLICY_NUMBER = chassis_policy_number_textbox.get()
-        CHASSIS_NUMBER = chassis_number_textbox.get()
-
-        RETURNED_POLICY_NUMBER = "Unknown"
-
         # Checking if enter is null
-        if chassis_policy_number_textbox.get() == "" or chassis_number_textbox.get() == "":
+        if reg_policy_number_textbox.get() == "" or reg_number_textbox.get() == "":
+            messagebox.showerror("Error",
+                                 f"Input Reg and policy number")
             print("Input Reg and policy number")
         else:
-            print(Running_program)
-            print("Starting")
-            # Getting the errors if there are any
+            global Running_program
+            Running_program += 1
+            runing_programs_button.config(text=Running_program, state="enabled")
+
+            if Running_program == 5:
+                Reg_update_button.config(state="disabled")
+
+            # get Entry data
+
+            CHASSIS_POLICY_NUMBER = chassis_policy_number_textbox.get()
+            CHASSIS_NUMBER = chassis_number_textbox.get()
+
+            RETURNED_POLICY_NUMBER = "Unknown"
+
             try:
                 print("Updating on A&G")
-                INCORRECT_REGNUMBER,RETURNED_POLICY_NUMBER,RETURNED_CHASSIS_NUMBER = correct_chassisNO(CHASSIS_POLICY_NUMBER,CHASSIS_NUMBER,LINK)
+                INCORRECT_REGNUMBER, RETURNED_POLICY_NUMBER, RETURNED_CHASSIS_NUMBER = correct_chassisNO(
+                    CHASSIS_POLICY_NUMBER, CHASSIS_NUMBER, LINK)
                 if INCORRECT_REGNUMBER == "Sorry. The Policy Number you entered does not exist or may have expired and has not been renewed":
                     Running_program -= 1
-                    print(f"Sorry. The Policy Number {RETURNED_POLICY_NUMBER} you entered does not exist or may have expired and has not been renewed")
+                    print(
+                        f"Sorry. The Policy Number {RETURNED_POLICY_NUMBER} you entered does not exist or may have expired and has not been renewed")
                     runing_programs_button.config(text=Running_program)
                     Reg_update_button.config(state="enabled")
                     # print("There was an error")
-                    messagebox.showerror(f'Chassis Number Correction [Invalid policy Number  {RETURNED_POLICY_NUMBER}]', f'Sorry. The Policy Number {RETURNED_POLICY_NUMBER} you entered does not exist \n or may have expired and has not been renewed')
+                    messagebox.showerror(
+                        f'Chassis Number Correction [Invalid policy Number  {RETURNED_POLICY_NUMBER}]',
+                        f'Sorry. The Policy Number {RETURNED_POLICY_NUMBER} you entered does not exist \n or may have expired and has not been renewed')
                     # openNewWindow(root, f"")
                     return
                 else:
                     print("Updating on NIID")
                     correct_chassisNo_Niid(RETURNED_POLICY_NUMBER, INCORRECT_REGNUMBER, RETURNED_CHASSIS_NUMBER)
                     Running_program -= 1
-                    messagebox.showinfo("Chassis Number Correction Successful", f"The Policy {RETURNED_POLICY_NUMBER} has been updated ✅")
+                    messagebox.showinfo("Chassis Number Correction Successful",
+                                        f"The Policy {RETURNED_POLICY_NUMBER} has been updated ✅")
                     runing_programs_button.config(text=Running_program)
                     Reg_update_button.config(state="enabled")
                     print(Running_program)
             except Exception as error:
                 # print(error)
-                messagebox.showerror(f'Chassis Number Correction Error',f'Policy Number {RETURNED_POLICY_NUMBER} \n {error}')
+                messagebox.showerror(f'Chassis Number Correction Error',
+                                        f'Policy Number {RETURNED_POLICY_NUMBER} \n {error}')
                 Running_program -= 1
                 runing_programs_button.config(text=Running_program)
                 Reg_update_button.config(state="enabled")
@@ -181,13 +187,14 @@ def run_program():
 
             return [Running_program]
 
+
     # Reg and chassis number correction function
     def update_reg_and_chassis_number():
         # Checking if enter is null
         if regNchassis_policy_number_textbox.get() == "" or regNchassis_reg_number_textbox.get() == "" or regNchassis_chassis_number_textbox == "":
             messagebox.showerror("Error",
-                                 f"Input Reg and policy number")
-            print("Input Reg and policy number")
+                                 f"Enter the required fields")
+            print("Enter the required fields")
         else:
             global Running_program
             print(Running_program)
@@ -244,6 +251,65 @@ def run_program():
 
             return [Running_program]
 
+    def update_name_num():
+        # Checking if enter is null
+        if name_change_policy_number_textbox.get() == "" or first_name_textbox.get() == "" or last_name_textbox.get() == "":
+            messagebox.showerror("Error",
+                                 f"Enter the required fields")
+            print("Enter the required fields")
+        else:
+            global Running_program
+            print(Running_program)
+            print("Starting")
+            # Getting the errors if there are any
+            Running_program += 1
+            runing_programs_button.config(text=Running_program, state="enabled")
+
+            if Running_program == 5:
+                Reg_update_button.config(state="disabled")
+
+            # get Entry data
+
+            NAME_POLICY_NUMBER = reg_policy_number_textbox.get()
+            FIRST_NAME = first_name_textbox.get()
+            LAST_NAME = last_name_textbox.get()
+
+            RETURNED_POLICY_NUMBER = "Unknown"
+
+            try:
+                print("Updating on A&G")
+                INCORRECT_REGNUMBER,RETURNED_POLICY_NUMBER = change_name(REG_POLICY_NUMBER,FIRST_NAME,LAST_NAME,LINK)
+                if INCORRECT_REGNUMBER == "Sorry. The Policy Number you entered does not exist or may have expired and has not been renewed":
+                    Running_program -= 1
+                    print(
+                        f"Sorry. The Policy Number {RETURNED_POLICY_NUMBER} you entered does not exist or may have expired and has not been renewed")
+                    runing_programs_button.config(text=Running_program)
+                    Reg_update_button.config(state="enabled")
+                    # print("There was an error")
+                    messagebox.showerror(f'Name Correction [Invalid policy Number  {RETURNED_POLICY_NUMBER}]',
+                                         f'Sorry. The Policy Number {RETURNED_POLICY_NUMBER} you entered does not exist \n or may have expired and has not been renewed')
+                    # openNewWindow(root, f"")
+                    return
+                else:
+                    Running_program -= 1
+                    messagebox.showinfo("Name Correction Successful",
+                                        f"The Policy {RETURNED_POLICY_NUMBER} has been updated ✅")
+                    runing_programs_button.config(text=Running_program)
+                    Reg_update_button.config(state="enabled")
+                    print(Running_program)
+            except Exception as error:
+                # print(error)
+                messagebox.showerror(f'Name Correction Error',
+                                     f'Policy Number {RETURNED_POLICY_NUMBER} \n {error}')
+                Running_program -= 1
+                runing_programs_button.config(text=Running_program)
+                Reg_update_button.config(state="enabled")
+
+            if Running_program == 0:
+                runing_programs_button.config(state="disabled")
+
+            return [Running_program]
+
     def run_function_in_background():
         # Create a thread to run the long_running_function
         thread = threading.Thread(target=update_reg_number)
@@ -257,6 +323,11 @@ def run_program():
     def run_reg_and_chassis_function_in_background():
         # Create a thread to run the long_running_function
         thread = threading.Thread(target=update_reg_and_chassis_number)
+        thread.start()
+
+    def run_name_change_function_in_background():
+        # Create a thread to run the long_running_function
+        thread = threading.Thread(target=update_name_num)
         thread.start()
 
     # Reg frame
@@ -376,7 +447,7 @@ def run_program():
     Reg_and_Chassis_Update_button = tb.Button(f2, text="Update", bootstyle="danger", width=30, command=run_reg_and_chassis_function_in_background)
     Reg_and_Chassis_Update_button.grid(row=5, column=3, padx=0, pady=10, )
 
-    # frme
+    # change name frame
     f2 = customtkinter.CTkFrame(Policy_frame, fg_color=Theme[3], border_width=2)
     f2.grid(padx=5, pady=5, column=1, row=1, sticky=NSEW)
 
@@ -384,23 +455,23 @@ def run_program():
     label_radio_group.grid(row=0, column=2, padx=10, pady=10, )
 
     # create textbox
-    reg_policy_number = tb.Label(master=f2, text="Policy Number")
-    reg_policy_number.grid(row=2, column=2, padx=10, pady=10, sticky="")
-    textbox = tb.Entry(f2, width=30, )
-    textbox.grid(row=2, column=3, padx=(10, 20), pady=(10, 20), sticky="nsew")
+    name_change_policy_number = tb.Label(master=f2, text="Policy Number")
+    name_change_policy_number.grid(row=2, column=2, padx=10, pady=10, sticky="")
+    name_change_policy_number_textbox = tb.Entry(f2, width=30, )
+    name_change_policy_number_textbox.grid(row=2, column=3, padx=(10, 20), pady=(10, 20), sticky="nsew")
 
-    reg_policy_number = tb.Label(master=f2, text="First Name")
-    reg_policy_number.grid(row=3, column=2, padx=10, pady=10, sticky="")
-    textbox = tb.Entry(f2, width=30)
-    textbox.grid(row=3, column=3, padx=(10, 20), pady=(10, 10), sticky="nsew")
+    first_name = tb.Label(master=f2, text="First Name")
+    first_name.grid(row=3, column=2, padx=10, pady=10, sticky="")
+    first_name_textbox = tb.Entry(f2, width=30)
+    first_name_textbox.grid(row=3, column=3, padx=(10, 20), pady=(10, 10), sticky="nsew")
 
-    reg_policy_number = tb.Label(master=f2, text="Last Name")
-    reg_policy_number.grid(row=4, column=2, padx=10, pady=10, sticky="")
-    textbox = tb.Entry(f2, width=30)
-    textbox.grid(row=4, column=3, padx=(10, 20), pady=(10, 10), sticky="nsew")
+    last_name = tb.Label(master=f2, text="Last Name")
+    last_name.grid(row=4, column=2, padx=10, pady=10, sticky="")
+    last_name_textbox = tb.Entry(f2, width=30)
+    last_name_textbox.grid(row=4, column=3, padx=(10, 20), pady=(10, 10), sticky="nsew")
 
-    sidebar_button_1 = tb.Button(f2, text="Update", bootstyle="danger", width=30)
-    sidebar_button_1.grid(row=5, column=3, padx=0, pady=10, )
+    Name_change_button = tb.Button(f2, text="Update", bootstyle="danger", width=30, command=run_name_change_function_in_background)
+    Name_change_button.grid(row=5, column=3, padx=0, pady=10, )
 
     # Verify Policy
     verify = customtkinter.CTkFrame(root, fg_color=Theme[3], height=30, border_width=1)
