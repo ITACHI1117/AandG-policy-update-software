@@ -285,7 +285,7 @@ def run_program():
 
             # get Entry data
 
-            NAME_POLICY_NUMBER = reg_policy_number_textbox.get()
+            NAME_POLICY_NUMBER = name_change_policy_number_textbox.get()
             FIRST_NAME = first_name_textbox.get()
             LAST_NAME = last_name_textbox.get()
 
@@ -293,7 +293,7 @@ def run_program():
 
             try:
                 print("Updating on A&G")
-                INCORRECT_REGNUMBER,RETURNED_POLICY_NUMBER = change_name(REG_POLICY_NUMBER,FIRST_NAME,LAST_NAME,LINK,SHOW_WINDOW)
+                INCORRECT_REGNUMBER,RETURNED_POLICY_NUMBER = change_name(NAME_POLICY_NUMBER,FIRST_NAME,LAST_NAME,LINK,SHOW_WINDOW)
                 if INCORRECT_REGNUMBER == "Sorry. The Policy Number you entered does not exist or may have expired and has not been renewed":
                     Running_program -= 1
                     print(
