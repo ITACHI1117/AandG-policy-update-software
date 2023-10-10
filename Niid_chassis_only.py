@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.service import Service
 # Main Function
 
 
-def correct_chassisNo_Niid(policy_number, reg_number, chassis_number):
+def correct_chassisNo_Niid(policy_number, reg_number, chassis_number,SHOW_WINDOW):
     # Provide the email and password
     email = 'mayowaa'
     password = 'Lovely1'
@@ -18,7 +18,7 @@ def correct_chassisNo_Niid(policy_number, reg_number, chassis_number):
     correct_chassisNo = chassis_number
 
     options = webdriver.ChromeOptions()
-    # options.add_argument("--headless=new")
+    options.add_argument(SHOW_WINDOW)
     # options.add_argument("--start-maximized")
     options.add_argument('--log-level=3')
 

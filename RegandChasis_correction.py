@@ -9,7 +9,7 @@ from Write_logs import write_logs
 
 
 # Main Function
-def correct_reg_and_chassisNO(policy_number, reg_number, chassis_number,platform_data):
+def correct_reg_and_chassisNO(policy_number, reg_number, chassis_number,platform_data,SHOW_WINDOW):
     # Provide the email and password
     email = platform_data[1]
     password = platform_data[2]
@@ -20,7 +20,7 @@ def correct_reg_and_chassisNO(policy_number, reg_number, chassis_number,platform
     correct_chassisNo = chassis_number
 
     options = webdriver.ChromeOptions()
-    # options.add_argument("--headless=new")
+    options.add_argument(SHOW_WINDOW)
     # options.add_argument("--start-maximized")
     options.add_argument('--log-level=3')
 

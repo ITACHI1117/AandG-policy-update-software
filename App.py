@@ -15,6 +15,7 @@ from Reg_Update import correct_regNo
 import multiprocessing
 
 from RegandChasis_correction import correct_reg_and_chassisNO
+from VerifyPolicy import verify_policy
 
 LightTheme = ["pulse", "default", "default", "white"]
 DarkTheme = ["cyborg", "dark", "default", "black"]
@@ -62,8 +63,18 @@ Running_program = 0
 
 print(Running_program)
 
-
+SHOW_WINDOW = "null"
 def run_program():
+
+    #Detremine if the chrome window will run headless or not
+    def window_satus_on():
+        global  SHOW_WINDOW
+        show_window_button.config(bootstyle="success",text="ON", command=window_satus_off)
+        SHOW_WINDOW = "null"
+    def window_satus_off():
+        global SHOW_WINDOW
+        show_window_button.config(bootstyle="secondary",text="OFF", command=window_satus_on)
+        SHOW_WINDOW = "--headless=new"
 
     #Reg number update function
     def update_reg_number():
@@ -91,9 +102,10 @@ def run_program():
             RETURNED_POLICY_NUMBER = "Unknown"
 
             try:
+                global SHOW_WINDOW
                 print("Updating on A&G")
                 INCORRECT_REGNUMBER, RETURNED_POLICY_NUMBER, RETURNED_REGNUMBER = correct_regNo(REG_POLICY_NUMBER,
-                                                                                                REG_NUMBER, LINK)
+                                                                                                REG_NUMBER, LINK,SHOW_WINDOW)
                 if INCORRECT_REGNUMBER == "Sorry. The Policy Number you entered does not exist or may have expired and has not been renewed":
                     Running_program -= 1
                     print(
@@ -107,7 +119,7 @@ def run_program():
                     return
                 else:
                     print("Updating on NIID")
-                    correct_regNoNiid(RETURNED_POLICY_NUMBER, RETURNED_POLICY_NUMBER, INCORRECT_REGNUMBER)
+                    correct_regNoNiid(RETURNED_POLICY_NUMBER, RETURNED_REGNUMBER, INCORRECT_REGNUMBER,SHOW_WINDOW)
                     Running_program -= 1
                     messagebox.showinfo("Reg Number Correction Successful",
                                         f"The Policy {RETURNED_POLICY_NUMBER} has been updated ✅")
@@ -129,10 +141,11 @@ def run_program():
 
     #Chassis only correction function
     def update_chassis_update_only():
+        global SHOW_WINDOW
         # Checking if enter is null
-        if reg_policy_number_textbox.get() == "" or reg_number_textbox.get() == "":
+        if chassis_policy_number_textbox.get() == "" or chassis_number_textbox.get() == "":
             messagebox.showerror("Error",
-                                 f"Input Reg and policy number")
+                                 f"Enter the required field")
             print("Input Reg and policy number")
         else:
             global Running_program
@@ -152,7 +165,7 @@ def run_program():
             try:
                 print("Updating on A&G")
                 INCORRECT_REGNUMBER, RETURNED_POLICY_NUMBER, RETURNED_CHASSIS_NUMBER = correct_chassisNO(
-                    CHASSIS_POLICY_NUMBER, CHASSIS_NUMBER, LINK)
+                    CHASSIS_POLICY_NUMBER, CHASSIS_NUMBER, LINK,SHOW_WINDOW)
                 if INCORRECT_REGNUMBER == "Sorry. The Policy Number you entered does not exist or may have expired and has not been renewed":
                     Running_program -= 1
                     print(
@@ -167,7 +180,7 @@ def run_program():
                     return
                 else:
                     print("Updating on NIID")
-                    correct_chassisNo_Niid(RETURNED_POLICY_NUMBER, INCORRECT_REGNUMBER, RETURNED_CHASSIS_NUMBER)
+                    correct_chassisNo_Niid(RETURNED_POLICY_NUMBER, INCORRECT_REGNUMBER, RETURNED_CHASSIS_NUMBER,SHOW_WINDOW)
                     Running_program -= 1
                     messagebox.showinfo("Chassis Number Correction Successful",
                                         f"The Policy {RETURNED_POLICY_NUMBER} has been updated ✅")
@@ -190,6 +203,7 @@ def run_program():
 
     # Reg and chassis number correction function
     def update_reg_and_chassis_number():
+        global SHOW_WINDOW
         # Checking if enter is null
         if regNchassis_policy_number_textbox.get() == "" or regNchassis_reg_number_textbox.get() == "" or regNchassis_chassis_number_textbox == "":
             messagebox.showerror("Error",
@@ -217,7 +231,7 @@ def run_program():
             try:
                 print("Updating on A&G")
                 INCORRECT_REGNUMBER,RETURNED_POLICY_NUMBER,RETURNED_CHASSIS_NUMBER,RETURNED_REGNUMBER = correct_reg_and_chassisNO(REGnCHASSIS_POLICY_NUMBER,
-                                                                                                REGnCHASSIS_REG_NUMBER,REGnCHASSIS_CHASSIS_NUMBER,LINK)
+                                                                                                REGnCHASSIS_REG_NUMBER,REGnCHASSIS_CHASSIS_NUMBER,LINK,SHOW_WINDOW)
                 if INCORRECT_REGNUMBER == "Sorry. The Policy Number you entered does not exist or may have expired and has not been renewed":
                     Running_program -= 1
                     print(
@@ -231,7 +245,7 @@ def run_program():
                     return
                 else:
                     print("Updating on NIID")
-                    correct_reg_and_chassisNo_Niid(RETURNED_POLICY_NUMBER,RETURNED_REGNUMBER,INCORRECT_REGNUMBER,RETURNED_CHASSIS_NUMBER)
+                    correct_reg_and_chassisNo_Niid(RETURNED_POLICY_NUMBER,RETURNED_REGNUMBER,INCORRECT_REGNUMBER,RETURNED_CHASSIS_NUMBER,SHOW_WINDOW)
                     Running_program -= 1
                     messagebox.showinfo("Reg and Chassis Number Correction Successful",
                                         f"The Policy {RETURNED_POLICY_NUMBER} has been updated ✅")
@@ -252,6 +266,7 @@ def run_program():
             return [Running_program]
 
     def update_name_num():
+        global  SHOW_WINDOW
         # Checking if enter is null
         if name_change_policy_number_textbox.get() == "" or first_name_textbox.get() == "" or last_name_textbox.get() == "":
             messagebox.showerror("Error",
@@ -278,7 +293,7 @@ def run_program():
 
             try:
                 print("Updating on A&G")
-                INCORRECT_REGNUMBER,RETURNED_POLICY_NUMBER = change_name(REG_POLICY_NUMBER,FIRST_NAME,LAST_NAME,LINK)
+                INCORRECT_REGNUMBER,RETURNED_POLICY_NUMBER = change_name(REG_POLICY_NUMBER,FIRST_NAME,LAST_NAME,LINK,SHOW_WINDOW)
                 if INCORRECT_REGNUMBER == "Sorry. The Policy Number you entered does not exist or may have expired and has not been renewed":
                     Running_program -= 1
                     print(
@@ -310,6 +325,66 @@ def run_program():
 
             return [Running_program]
 
+    def verify_policy_by_certi():
+        global SHOW_WINDOW
+        # Checking if enter is null
+        if verify_reg_policy_number_textbox.get() == "":
+            messagebox.showerror("Error",
+                                 f"Enter the required fields")
+            print("Enter the required fields")
+        else:
+            global Running_program
+            print(Running_program)
+            print("Starting")
+            # Getting the errors if there are any
+            Running_program += 1
+            runing_programs_button.config(text=Running_program, state="enabled")
+
+            if Running_program == 5:
+                Reg_update_button.config(state="disabled")
+                Chassis_update_button.config(state="disabled")
+                Reg_and_Chassis_Update_button.config(state="disabled")
+                Name_change_button.config(state="disabled")
+                verify_button.config(state="disabled")
+
+            # get Entry data
+
+            CERTI_NUMBER = verify_reg_policy_number_textbox.get()
+
+            RETURNED_CERTI_NUMBER = "Unknown"
+
+            try:
+                print("Updating on A&G")
+                DATA, RETURNED_CERTI_NUMBER = verify_policy(CERTI_NUMBER,LINK,SHOW_WINDOW)
+                if DATA == "There is no Existing Policy Record for the Certificate Number you Typed":
+                    Running_program -= 1
+                    runing_programs_button.config(text=Running_program)
+                    Reg_update_button.config(state="enabled")
+                    # print("There was an error")
+                    messagebox.showerror(f'No Record for {RETURNED_CERTI_NUMBER}]',
+                                         f'There is no Existing Policy Record for the Certificate Number you Typed')
+                    runing_programs_button.config(state="disabled")
+                    # openNewWindow(root, f"")
+                    return
+                else:
+                    Running_program -= 1
+                    print(DATA)
+                    runing_programs_button.config(text=Running_program)
+                    Reg_update_button.config(state="enabled")
+                    print(Running_program)
+            except Exception as error:
+                print(error)
+                messagebox.showerror(f'Verify Policy Error',
+                                     f'Certificate Number {RETURNED_CERTI_NUMBER} \n {error}')
+                Running_program -= 1
+                runing_programs_button.config(text=Running_program)
+                Reg_update_button.config(state="enabled")
+
+            if Running_program == 0:
+                runing_programs_button.config(state="disabled")
+
+            return [Running_program]
+
     def run_function_in_background():
         # Create a thread to run the long_running_function
         thread = threading.Thread(target=update_reg_number)
@@ -329,6 +404,12 @@ def run_program():
         # Create a thread to run the long_running_function
         thread = threading.Thread(target=update_name_num)
         thread.start()
+    def run_verify_policy_function_in_background():
+        # Create a thread to run the long_running_function
+        thread = threading.Thread(target=verify_policy_by_certi)
+        thread.start()
+
+
 
     # Reg frame
     root.columnconfigure(2, weight=1)
@@ -350,10 +431,16 @@ def run_program():
     epin_button.grid(pady=10, padx=0)
     # Side bar Label
     my_label = tb.Label(my_frame, text="Running Updates", bootstyle=Theme[2], font=("Helvetica", 15))
-    my_label.grid(pady=30, padx=(20, 20))
+    my_label.grid(pady=10, padx=(20, 20))
     # Running Programs
     runing_programs_button = tb.Button(my_frame, text=Running_program, state="disabled", bootstyle="success ", width=20)
-    runing_programs_button.grid(pady=10, padx=0)
+    runing_programs_button.grid(pady=5, padx=0)
+
+    my_label = tb.Label(my_frame, text="Show Chrome Window", bootstyle=Theme[2], font=("Helvetica", 12))
+    my_label.grid(pady=10, padx=(20, 20))
+    # Running Programs
+    show_window_button = tb.Button(my_frame, text="ON", state="enabled", bootstyle="success", width=20, command=window_satus_off)
+    show_window_button.grid(pady=0, padx=0)
 
     # if Theme == LightTheme:
     #     # THEME button
@@ -477,28 +564,13 @@ def run_program():
     verify = customtkinter.CTkFrame(root, fg_color=Theme[3], height=30, border_width=1)
     verify.grid(padx=5, pady=5, column=2, row=3, sticky=EW)
 
-    reg_policy_number = tb.Label(master=verify, text="Verify Policy")
-    reg_policy_number.grid(row=0, column=0, padx=10, pady=10, sticky="")
-    textbox = tb.Entry(verify, width=30)
-    textbox.grid(row=0, column=2, padx=(10, 20), pady=(10, 10), sticky="nsew")
+    verify_reg_policy_number = tb.Label(master=verify, text="Verify Policy")
+    verify_reg_policy_number.grid(row=0, column=0, padx=10, pady=10, sticky="")
+    verify_reg_policy_number_textbox = tb.Entry(verify, width=30)
+    verify_reg_policy_number_textbox.grid(row=0, column=2, padx=(10, 20), pady=(10, 10), sticky="nsew")
 
-    sidebar_button_1 = tb.Button(verify, text="Update", bootstyle="danger", width=30)
-    sidebar_button_1.grid(row=0, column=3, padx=0, pady=10, )
-
-    # my_label = tb.Label(reg_frame, text="Reg Correction",  bootstyle="inverse-dark", font=("Helvetica", 10) )
-    # my_label.grid(column=0, pady=20,padx=(20, 20))
-    #
-    # my_label = tb.Label(reg_frame, text="Policy Number",  bootstyle="inverse-dark", font=("Helvetica", 10) )
-    # my_label.grid(column=0, pady=20,padx=(20, 20))
-    #
-    # policy_input = Entry(reg_frame, width=30,)
-    # policy_input.grid(column=1, row=1, padx=30)
-    #
-    # my_label = tb.Label(reg_frame, text="Reg Number",  bootstyle="inverse-dark", font=("Helvetica", 10) )
-    # my_label.grid(column=0, pady=20,padx=(20, 20))
-    #
-    # policy_input = Entry(reg_frame, width=30,)
-    # policy_input.grid(column=1, row=2, padx=30)
+    verify_button = tb.Button(verify, text="Update", bootstyle="danger", width=30, command=run_verify_policy_function_in_background)
+    verify_button.grid(row=0, column=3, padx=0, pady=10, )
 
     root.mainloop()
 

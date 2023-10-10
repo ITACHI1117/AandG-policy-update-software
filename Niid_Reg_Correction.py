@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.service import Service
 # Main Function
 
 
-def correct_regNoNiid(policy_number, reg_number, incorrect_regnumber):
+def correct_regNoNiid(policy_number, reg_number, incorrect_regnumber,SHOW_WINDOW):
     # Provide the email and password
     email = 'mayowaa'
     password = 'Lovely1'
@@ -18,7 +18,7 @@ def correct_regNoNiid(policy_number, reg_number, incorrect_regnumber):
     incorrect_regNo = incorrect_regnumber  # reg_number
 
     options = webdriver.ChromeOptions()
-    # options.add_argument("--headless=new")
+    options.add_argument(SHOW_WINDOW)
     # options.add_argument("--start-maximized")
     options.add_argument('--log-level=3')
 
