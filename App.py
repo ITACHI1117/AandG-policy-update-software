@@ -16,6 +16,7 @@ import multiprocessing
 
 from RegandChasis_correction import correct_reg_and_chassisNO
 from VerifyPolicy import verify_policy
+from verify_policy_results_window import openNewWindow
 
 LightTheme = ["pulse", "default", "default", "white"]
 DarkTheme = ["cyborg", "dark", "default", "black"]
@@ -34,7 +35,7 @@ REG_POLICY_NUMBER = ""
 email = 'mayowa_admin'
 password = 'Gbohunmi17'
 LINK = ["https://aginsuranceapplications.com/card/Index.aspx", email, password]
-print(LINK)
+
 
 
 # Change Platform to Scratch Card
@@ -60,8 +61,6 @@ def change_platform_epin():
 Running_program = 0
 # Update Reg Number Function
 
-
-print(Running_program)
 
 SHOW_WINDOW = "null"
 def run_program():
@@ -369,6 +368,9 @@ def run_program():
                 else:
                     Running_program -= 1
                     print(DATA)
+                    delimiter = "\n"
+                    data = delimiter.join(DATA)
+                    openNewWindow(root, data)
                     runing_programs_button.config(text=Running_program)
                     Reg_update_button.config(state="enabled")
                     print(Running_program)
