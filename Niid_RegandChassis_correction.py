@@ -26,6 +26,7 @@ def correct_reg_and_chassisNo_Niid(policy_number, reg_number, incorrect_regnumbe
     # Provide the path of chromedriver present on your system.
     path = (r"chromedriver.exe")
     service = Service(executable_path=path)
+    service.creation_flags = 0x08000000
     driver = webdriver.Chrome(options=options, service=service)
     # driver.set_window_size(1920, 1080)
 

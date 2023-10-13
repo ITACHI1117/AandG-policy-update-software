@@ -92,6 +92,10 @@ def run_program():
 
             if Running_program == 5:
                 Reg_update_button.config(state="disabled")
+                Chassis_update_button.config(state="disabled")
+                Reg_and_Chassis_Update_button.config(state="disabled")
+                Name_change_button.config(state="disabled")
+                verify_button.config(state="disabled")
 
             # get Entry data
             global REG_POLICY_NUMBER
@@ -132,6 +136,16 @@ def run_program():
                 Running_program -= 1
                 runing_programs_button.config(text=Running_program)
                 Reg_update_button.config(state="enabled")
+                Chassis_update_button.config(state="enabled")
+                Reg_and_Chassis_Update_button.config(state="enabled")
+                Name_change_button.config(state="enabled")
+                verify_button.config(state="enabled")
+            finally:
+                Reg_update_button.config(state="enabled")
+                Chassis_update_button.config(state="enabled")
+                Reg_and_Chassis_Update_button.config(state="enabled")
+                Name_change_button.config(state="enabled")
+                verify_button.config(state="enabled")
 
             if Running_program == 0:
                 runing_programs_button.config(state="disabled")
@@ -153,6 +167,10 @@ def run_program():
 
             if Running_program == 5:
                 Reg_update_button.config(state="disabled")
+                Chassis_update_button.config(state="disabled")
+                Reg_and_Chassis_Update_button.config(state="disabled")
+                Name_change_button.config(state="disabled")
+                verify_button.config(state="disabled")
 
             # get Entry data
 
@@ -193,6 +211,16 @@ def run_program():
                 Running_program -= 1
                 runing_programs_button.config(text=Running_program)
                 Reg_update_button.config(state="enabled")
+                Chassis_update_button.config(state="enabled")
+                Reg_and_Chassis_Update_button.config(state="enabled")
+                Name_change_button.config(state="enabled")
+                verify_button.config(state="enabled")
+            finally:
+                Reg_update_button.config(state="enabled")
+                Chassis_update_button.config(state="enabled")
+                Reg_and_Chassis_Update_button.config(state="enabled")
+                Name_change_button.config(state="enabled")
+                verify_button.config(state="enabled")
 
             if Running_program == 0:
                 runing_programs_button.config(state="disabled")
@@ -218,6 +246,10 @@ def run_program():
 
             if Running_program == 5:
                 Reg_update_button.config(state="disabled")
+                Chassis_update_button.config(state="disabled")
+                Reg_and_Chassis_Update_button.config(state="disabled")
+                Name_change_button.config(state="disabled")
+                verify_button.config(state="disabled")
 
             # get Entry data
 
@@ -258,6 +290,16 @@ def run_program():
                 Running_program -= 1
                 runing_programs_button.config(text=Running_program)
                 Reg_update_button.config(state="enabled")
+                Chassis_update_button.config(state="enabled")
+                Reg_and_Chassis_Update_button.config(state="enabled")
+                Name_change_button.config(state="enabled")
+                verify_button.config(state="enabled")
+            finally:
+                Reg_update_button.config(state="enabled")
+                Chassis_update_button.config(state="enabled")
+                Reg_and_Chassis_Update_button.config(state="enabled")
+                Name_change_button.config(state="enabled")
+                verify_button.config(state="enabled")
 
             if Running_program == 0:
                 runing_programs_button.config(state="disabled")
@@ -281,6 +323,10 @@ def run_program():
 
             if Running_program == 5:
                 Reg_update_button.config(state="disabled")
+                Chassis_update_button.config(state="disabled")
+                Reg_and_Chassis_Update_button.config(state="disabled")
+                Name_change_button.config(state="disabled")
+                verify_button.config(state="disabled")
 
             # get Entry data
 
@@ -318,6 +364,16 @@ def run_program():
                 Running_program -= 1
                 runing_programs_button.config(text=Running_program)
                 Reg_update_button.config(state="enabled")
+                Chassis_update_button.config(state="enabled")
+                Reg_and_Chassis_Update_button.config(state="enabled")
+                Name_change_button.config(state="enabled")
+                verify_button.config(state="enabled")
+            finally:
+                Reg_update_button.config(state="enabled")
+                Chassis_update_button.config(state="enabled")
+                Reg_and_Chassis_Update_button.config(state="enabled")
+                Name_change_button.config(state="enabled")
+                verify_button.config(state="enabled")
 
             if Running_program == 0:
                 runing_programs_button.config(state="disabled")
@@ -381,9 +437,20 @@ def run_program():
                 Running_program -= 1
                 runing_programs_button.config(text=Running_program)
                 Reg_update_button.config(state="enabled")
+                Chassis_update_button.config(state="enabled")
+                Reg_and_Chassis_Update_button.config(state="enabled")
+                Name_change_button.config(state="enabled")
+                verify_button.config(state="enabled")
+            finally:
+                Reg_update_button.config(state="enabled")
+                Chassis_update_button.config(state="enabled")
+                Reg_and_Chassis_Update_button.config(state="enabled")
+                Name_change_button.config(state="enabled")
+                verify_button.config(state="enabled")
 
             if Running_program == 0:
                 runing_programs_button.config(state="disabled")
+
 
             return [Running_program]
 
@@ -440,7 +507,7 @@ def run_program():
 
     my_label = tb.Label(my_frame, text="Show Chrome Window", bootstyle=Theme[2], font=("Helvetica", 12))
     my_label.grid(pady=10, padx=(20, 20))
-    # Running Programs
+
     show_window_button = tb.Button(my_frame, text="ON", state="enabled", bootstyle="success", width=20, command=window_satus_off)
     show_window_button.grid(pady=0, padx=0)
 
@@ -571,7 +638,7 @@ def run_program():
     verify_reg_policy_number_textbox = tb.Entry(verify, width=30)
     verify_reg_policy_number_textbox.grid(row=0, column=2, padx=(10, 20), pady=(10, 10), sticky="nsew")
 
-    verify_button = tb.Button(verify, text="Update", bootstyle="danger", width=30, command=run_verify_policy_function_in_background)
+    verify_button = tb.Button(verify, text="Verify", bootstyle="danger", width=30, command=run_verify_policy_function_in_background)
     verify_button.grid(row=0, column=3, padx=0, pady=10, )
 
     root.mainloop()

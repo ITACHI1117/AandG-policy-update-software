@@ -30,6 +30,7 @@ def change_name(policy_number, firstname, lastname,platform_data,SHOW_WINDOW):
     # Provide the path of chromedriver present on your system.
     path = (r"chromedriver.exe")
     service = Service(executable_path=path)
+    service.creation_flags = 0x08000000
     driver = webdriver.Chrome(options=options, service=service)
     # driver.set_window_size(1920, 1080)
 
