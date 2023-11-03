@@ -21,6 +21,8 @@ from fetch_Reg_number import fetch_regNo
 from fetch_RegandChassis_number import fetch_reg_and_chassisNO
 from fetch_chassis_number import fetch_wrong_chassis
 from PIL import ImageTk, Image
+
+from Check_driver import Check_and_install_Updated_driver
 from verify_policy_results_window import openNewWindow
 
 LightTheme = ["pulse", "default", "default", "white"]
@@ -71,6 +73,17 @@ Running_program = 0
 
 SHOW_WINDOW = "null"
 def run_program():
+
+
+    # def run_Status_check_in_background():
+    #     # Create a thread to run the long_running_function
+    #     thread = threading.Thread(target=Check_and_install_Updated_driver)
+    #     thread.start()
+
+    # Check the driver Status
+    Status = Check_and_install_Updated_driver()
+    messagebox.showinfo("Driver verification",
+                        Status)
 
     #Detremine if the chrome window will run headless or not
     def window_satus_on():
