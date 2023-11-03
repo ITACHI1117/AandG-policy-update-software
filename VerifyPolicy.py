@@ -10,10 +10,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 # Main Function
 
 
-def verify_policy(certi_No,platform_data,SHOW_WINDOW):
+def verify_policy(certi_No,SHOW_WINDOW):
     # Provide the email and password
-    email = platform_data[1]
-    password = platform_data[2]
 
     # Provide policy number
     certi = certi_No
@@ -32,39 +30,8 @@ def verify_policy(certi_No,platform_data,SHOW_WINDOW):
     # driver.set_window_size(1920, 1080)
 
     # Send a get request to the url
-    driver.get(platform_data[0])
+    driver.get("https://aginsuranceapplications.com/card/VerifyDataMaster.aspx")
     time.sleep(0.2)
-
-    # Finds the input box by name in DOM tree to send both
-    # the provided email and password in it.
-    username = driver.find_element(by="xpath",
-                                   value='//div[@class="col-md-offset-2 col-md-4 center-block panel-primary"]/input[1]')
-    username.send_keys(email)
-    keycode = driver.find_element(by="xpath",
-                                  value='//div[@class="col-md-offset-2 col-md-4 center-block panel-primary"]/input[2]')
-    keycode.send_keys(password)
-
-    # Find the signin button and click on it.
-    driver.find_element(by="xpath", value='//div/input[3]').click()
-    time.sleep(0.2)
-
-    # Find the Utility button and click on it.
-    driver.find_element(
-        by="xpath", value='//div[@class="menu-list"]/ul/ul/div[6]/div/li/a').click()
-    time.sleep(1)
-
-    # The policy button location is different for both platforms
-    # verifying which platform has been selected to check where the button is for that particular platform
-    if platform_data[0] == 'https://aginsuranceapplications.com/card/Index.aspx':
-        # Find the Verify Policy button and click on it.
-        driver.find_element(
-            by="xpath", value='//div[@class="menu-list"]/ul/ul/div[6]/div[2]/ul/li[4]').click()
-        time.sleep(1)
-    else:
-        # Find the Verify Policy button and click on it.
-        driver.find_element(
-            by="xpath", value='//div[@class="menu-list"]/ul/ul/div[6]/div[2]/ul/li[1]').click()
-        time.sleep(1)
 
 
     # Find the SearchBy (select attribute) option and click on it.

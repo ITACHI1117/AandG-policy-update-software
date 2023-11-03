@@ -5,22 +5,19 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 
-
 from Write_logs import write_logs
 
 
 # Main Function
-
-
-def change_name(policy_number, firstname, lastname,platform_data,SHOW_WINDOW):
+def fetch_reg_and_chassisNO(policy_number, reg_number, chassis_number,platform_data,SHOW_WINDOW):
     # Provide the email and password
     email = platform_data[1]
     password = platform_data[2]
 
     # Provide policy number
     policy = policy_number
-    first = firstname
-    last = lastname
+    correct_regNo = reg_number
+    correct_chassisNo = chassis_number
 
     options = webdriver.ChromeOptions()
     options.add_argument(SHOW_WINDOW)
@@ -32,7 +29,7 @@ def change_name(policy_number, firstname, lastname,platform_data,SHOW_WINDOW):
     service = Service(executable_path=path)
     service.creation_flags = 0x08000000
     driver = webdriver.Chrome(options=options, service=service)
-    driver.set_window_size(1200, 800)
+    # driver.set_window_size(1920, 1080)
 
     # Send a get request to the url
     driver.get(platform_data[0])
@@ -63,21 +60,22 @@ def change_name(policy_number, firstname, lastname,platform_data,SHOW_WINDOW):
     time.sleep(0.2)
 
     # Find the Search by option and click on it.
-    driver.find_element(
-        by="xpath", value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary panel-heading"]/div[3]/div/select').click()
+    driver.find_element(by="xpath",
+                        value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary panel-heading"]/div['
+                              '3]/div/select').click()
     time.sleep(0.2)
 
     # Find the fetch by policy button and click on it.
-    driver.find_element(
-        by="xpath", value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary panel-heading"]/div[3]/div/select/option[2]').click()
+    driver.find_element(by="xpath",
+                        value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary panel-heading"]/div['
+                              '3]/div/select/option[2]').click()
     time.sleep(0.2)
-
-    # Check if the error box showed up and print the message
 
     # Finds the input box by name in DOM tree to send
     # the provided Policy in it.
-    policy_number = driver.find_element(
-        by="xpath", value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary panel-heading"]/div/div[2]/input')
+    policy_number = driver.find_element(by="xpath",
+                                        value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary '
+                                              'panel-heading"]/div/div[2]/input')
     policy_number.send_keys(policy)
 
     # Find the Fetch button and click on it.
@@ -85,7 +83,6 @@ def change_name(policy_number, firstname, lastname,platform_data,SHOW_WINDOW):
                         value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary '
                               'panel-heading"]/div/div[3]/input').click()
     time.sleep(1)
-
     # Checking if the screen is loading
     cssValue = driver.find_element(
         by="xpath", value='//div[4]').value_of_css_property('display')
@@ -94,23 +91,27 @@ def change_name(policy_number, firstname, lastname,platform_data,SHOW_WINDOW):
     while cssValue == 'block':
         cssValue = driver.find_element(
             by="xpath", value='//div[4]').value_of_css_property('display')
-        print(cssValue)
         print('Loading...')
         time.sleep(1.2)
         if cssValue == 'none':
             print("Done Loading✅")
 
+    time.sleep(1)
+
     # checking for error message
     errobox_value = driver.find_element(
-        by="xpath", value='//div[@class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable ui-dialog-buttons"][2]').value_of_css_property('display')
+        by="xpath",
+        value='//div[@class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable ui-dialog-buttons"][2]').value_of_css_property(
+        'display')
 
     print(f"error value ={errobox_value}")
     ERROR_MESSAGE = ""
     if errobox_value == 'block':
         ERROR_MESSAGE = driver.find_element(
-            by="xpath", value='//div[@class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable ui-dialog-buttons"][2]/div[2]').text
-        print(f"error message ={ERROR_MESSAGE}")
-        return ERROR_MESSAGE,policy
+            by="xpath",
+            value='//div[@class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable ui-dialog-buttons"][2]/div[2]').text
+        print(f"error message ={ERROR_MESSAGE}  policy number = {policy}  regnumber = {reg_number}")
+        return ERROR_MESSAGE,policy,chassis_number,correct_regNo
     else:
         print("policy found")
 
@@ -135,65 +136,19 @@ def change_name(policy_number, firstname, lastname,platform_data,SHOW_WINDOW):
     print(Reg_number)
 
     time.sleep(0.2)
-    # Get the value of the firstname
+
+    #Getting the value of the chassis number
     value_text = driver.find_element(by="xpath",
-                                     value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary panel-heading"]/div[4]/div[1]/input')
-    old_firstname = value_text.get_attribute("value")
-    print(old_firstname)
+                                     value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary panel-heading"]/div[8]/div[2]/input')
+    old_chassis_number = value_text.get_attribute("value")
+    print(old_chassis_number)
 
-    # Editing the First Name
-    driver.find_element(by="xpath",
-                        value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary panel-heading"]/div[4]/div[1]/input').clear()
-    namefirst = driver.find_element(by="xpath",
-                                    value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary panel-heading"]/div[4]/div[1]/input')
-    namefirst.send_keys(first)
-    time.sleep(0.2)
 
-    # Get the value of the Surname
-    value_text = driver.find_element(by="xpath",
-                                     value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary panel-heading"]/div[4]/div[2]/input')
-    old_lastname = value_text.get_attribute("value")
-    print(old_lastname)
-
-    # Editing the SurName
-    driver.find_element(by="xpath",
-                        value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary panel-heading"]/div[4]/div[2]/input').clear()
-    namefirst = driver.find_element(by="xpath",
-                                    value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary panel-heading"]/div[4]/div[2]/input')
-    namefirst.send_keys(last)
-    time.sleep(0.2)
-
-    # Find the Save button and click on it.
-    driver.find_element(by="xpath",
-                        value='//div[@class="col-md-offset-3 col-md-8 center-block panel-primary panel-heading"]/div['
-                              '14]/div/input').click()
-    time.sleep(0.2)
-
-    # Find the Yes button and click on it.
-    driver.find_element(by="xpath",
-                        value='//div[@class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable '
-                              'ui-resizable ui-dialog-buttons"]/div/div/button').click()
-    time.sleep(1.2)
-
-    cssValue = driver.find_element(
-        by="xpath", value='//div[4]').value_of_css_property('display')
-    # Waiting for Screen to load before Updating the policy
-    while cssValue == 'block':
-        cssValue = driver.find_element(
-            by="xpath", value='//div[4]').value_of_css_property('display')
-        print('Loading...')
-        time.sleep(1.2)
-        if cssValue == 'none':
-            print("Done Loading✅")
-
-    POLICY_NUMBER = policy
-    NEW_NAME = [f"First Name: {firstname}",f" Last Name: {lastname}"]
-    OLD_NAME = [f"First Name: {old_firstname}", f" Last Name: {old_lastname}"]
-
-    write_logs(POLICY_NUMBER,None,None,None,None,OLD_NAME,NEW_NAME,"name_update")
+    # calling the write log function to write the log files
+    # write_logs(POLICY_NUMBER, NEW_REGNUMBER, OLD_REGNUMBER, NEW_CHASSIS_NUMBER, OLD_CHASSIS_NUMBER, None, None, "Reg_and_chassis_Update")
     print("Done✅")
     # Quits the driver
     driver.close()
     driver.quit()
 
-    return ERROR_MESSAGE,policy
+    return Reg_number,policy,old_chassis_number,correct_regNo

@@ -12,6 +12,7 @@ def openNewWindow(root,errmessage):
     newWindow.title("Policy results")
     newWindow.iconbitmap("./A&GICON.ico")
     newWindow.geometry('600x400')
+    newWindow.grab_set()
 
     # sets the geometry of toplevel
     h = Scrollbar(newWindow, orient='horizontal')
