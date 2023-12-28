@@ -118,6 +118,9 @@ def run_program():
                 Reg_and_Chassis_Update_button.config(state="disabled")
                 Name_change_button.config(state="disabled")
                 verify_button.config(state="disabled")
+                Reg_fetch_button.config(state="disabled")
+                Chassis_fetch_button.config(state="disabled")
+                Reg_and_Chassis_Fetch_button.config(state="disabled")
 
             # get Entry data
             global REG_POLICY_NUMBER
@@ -161,12 +164,18 @@ def run_program():
                 Reg_and_Chassis_Update_button.config(state="enabled")
                 Name_change_button.config(state="enabled")
                 verify_button.config(state="enabled")
+                Reg_fetch_button.config(state="enabled")
+                Chassis_fetch_button.config(state="enabled")
+                Reg_and_Chassis_Fetch_button.config(state="enabled")
             finally:
                 Reg_update_button.config(state="enabled")
                 Chassis_update_button.config(state="enabled")
                 Reg_and_Chassis_Update_button.config(state="enabled")
                 Name_change_button.config(state="enabled")
                 verify_button.config(state="enabled")
+                Reg_fetch_button.config(state="enabled")
+                Chassis_fetch_button.config(state="enabled")
+                Reg_and_Chassis_Fetch_button.config(state="enabled")
 
             if Running_program == 0:
                 runing_programs_button.config(state="disabled")
@@ -192,6 +201,9 @@ def run_program():
                 Reg_and_Chassis_Update_button.config(state="disabled")
                 Name_change_button.config(state="disabled")
                 verify_button.config(state="disabled")
+                Reg_fetch_button.config(state="disabled")
+                Chassis_fetch_button.config(state="disabled")
+                Reg_and_Chassis_Fetch_button.config(state="disabled")
 
             # get Entry data
 
@@ -234,12 +246,19 @@ def run_program():
                 Reg_and_Chassis_Update_button.config(state="enabled")
                 Name_change_button.config(state="enabled")
                 verify_button.config(state="enabled")
+                Reg_fetch_button.config(state="enabled")
+                Chassis_fetch_button.config(state="enabled")
+                Reg_and_Chassis_Fetch_button.config(state="enabled")
+
             finally:
                 Reg_update_button.config(state="enabled")
                 Chassis_update_button.config(state="enabled")
                 Reg_and_Chassis_Update_button.config(state="enabled")
                 Name_change_button.config(state="enabled")
                 verify_button.config(state="enabled")
+                Reg_fetch_button.config(state="enabled")
+                Chassis_fetch_button.config(state="enabled")
+                Reg_and_Chassis_Fetch_button.config(state="enabled")
 
             if Running_program == 0:
                 runing_programs_button.config(state="disabled")
@@ -267,6 +286,10 @@ def run_program():
                 Reg_and_Chassis_Update_button.config(state="disabled")
                 Name_change_button.config(state="disabled")
                 verify_button.config(state="disabled")
+                Reg_fetch_button.config(state="disabled")
+                Chassis_fetch_button.config(state="disabled")
+                Reg_and_Chassis_Fetch_button.config(state="disabled")
+
 
             # get Entry data
 
@@ -313,12 +336,18 @@ def run_program():
                 Reg_and_Chassis_Update_button.config(state="enabled")
                 Name_change_button.config(state="enabled")
                 verify_button.config(state="enabled")
+                Reg_fetch_button.config(state="enabled")
+                Chassis_fetch_button.config(state="enabled")
+                Reg_and_Chassis_Fetch_button.config(state="enabled")
             finally:
                 Reg_update_button.config(state="enabled")
                 Chassis_update_button.config(state="enabled")
                 Reg_and_Chassis_Update_button.config(state="enabled")
                 Name_change_button.config(state="enabled")
                 verify_button.config(state="enabled")
+                Reg_fetch_button.config(state="enabled")
+                Chassis_fetch_button.config(state="enabled")
+                Reg_and_Chassis_Fetch_button.config(state="enabled")
 
             if Running_program == 0:
                 runing_programs_button.config(state="disabled")
@@ -346,6 +375,9 @@ def run_program():
                 Reg_and_Chassis_Update_button.config(state="disabled")
                 Name_change_button.config(state="disabled")
                 verify_button.config(state="disabled")
+                Reg_fetch_button.config(state="disabled")
+                Chassis_fetch_button.config(state="disabled")
+                Reg_and_Chassis_Fetch_button.config(state="disabled")
 
             # get Entry data
             global REG_POLICY_NUMBER
@@ -392,12 +424,18 @@ def run_program():
                 Reg_and_Chassis_Update_button.config(state="enabled")
                 Name_change_button.config(state="enabled")
                 verify_button.config(state="enabled")
+                Reg_fetch_button.config(state="enabled")
+                Chassis_fetch_button.config(state="enabled")
+                Reg_and_Chassis_Fetch_button.config(state="enabled")
             finally:
                 Reg_update_button.config(state="enabled")
                 Chassis_update_button.config(state="enabled")
                 Reg_and_Chassis_Update_button.config(state="enabled")
                 Name_change_button.config(state="enabled")
                 verify_button.config(state="enabled")
+                Reg_fetch_button.config(state="enabled")
+                Chassis_fetch_button.config(state="enabled")
+                Reg_and_Chassis_Fetch_button.config(state="enabled")
 
             if Running_program == 0:
                 runing_programs_button.config(state="disabled")
@@ -426,6 +464,9 @@ def run_program():
                 Reg_and_Chassis_Update_button.config(state="disabled")
                 Name_change_button.config(state="disabled")
                 verify_button.config(state="disabled")
+                Reg_fetch_button.config(state="disabled")
+                Chassis_fetch_button.config(state="disabled")
+                Reg_and_Chassis_Fetch_button.config(state="disabled")
 
             # get Entry data
 
@@ -470,12 +511,18 @@ def run_program():
                 Reg_and_Chassis_Update_button.config(state="enabled")
                 Name_change_button.config(state="enabled")
                 verify_button.config(state="enabled")
+                Reg_fetch_button.config(state="enabled")
+                Chassis_fetch_button.config(state="enabled")
+                Reg_and_Chassis_Fetch_button.config(state="enabled")
             finally:
                 Reg_update_button.config(state="enabled")
                 Chassis_update_button.config(state="enabled")
                 Reg_and_Chassis_Update_button.config(state="enabled")
                 Name_change_button.config(state="enabled")
                 verify_button.config(state="enabled")
+                Reg_fetch_button.config(state="enabled")
+                Chassis_fetch_button.config(state="enabled")
+                Reg_and_Chassis_Fetch_button.config(state="enabled")
 
             if Running_program == 0:
                 runing_programs_button.config(state="disabled")
@@ -505,6 +552,9 @@ def run_program():
                 Reg_and_Chassis_Update_button.config(state="disabled")
                 Name_change_button.config(state="disabled")
                 verify_button.config(state="disabled")
+                Reg_fetch_button.config(state="disabled")
+                Chassis_fetch_button.config(state="disabled")
+                Reg_and_Chassis_Fetch_button.config(state="disabled")
 
             # get Entry data
 
@@ -550,12 +600,18 @@ def run_program():
                 Reg_and_Chassis_Update_button.config(state="enabled")
                 Name_change_button.config(state="enabled")
                 verify_button.config(state="enabled")
+                Reg_fetch_button.config(state="enabled")
+                Chassis_fetch_button.config(state="enabled")
+                Reg_and_Chassis_Fetch_button.config(state="enabled")
             finally:
                 Reg_update_button.config(state="enabled")
                 Chassis_update_button.config(state="enabled")
                 Reg_and_Chassis_Update_button.config(state="enabled")
                 Name_change_button.config(state="enabled")
                 verify_button.config(state="enabled")
+                Reg_fetch_button.config(state="enabled")
+                Chassis_fetch_button.config(state="enabled")
+                Reg_and_Chassis_Fetch_button.config(state="enabled")
 
             if Running_program == 0:
                 runing_programs_button.config(state="disabled")
@@ -583,6 +639,9 @@ def run_program():
                 Reg_and_Chassis_Update_button.config(state="disabled")
                 Name_change_button.config(state="disabled")
                 verify_button.config(state="disabled")
+                Reg_fetch_button.config(state="disabled")
+                Chassis_fetch_button.config(state="disabled")
+                Reg_and_Chassis_Fetch_button.config(state="disabled")
 
             # get Entry data
 
@@ -624,12 +683,18 @@ def run_program():
                 Reg_and_Chassis_Update_button.config(state="enabled")
                 Name_change_button.config(state="enabled")
                 verify_button.config(state="enabled")
+                Reg_fetch_button.config(state="enabled")
+                Chassis_fetch_button.config(state="enabled")
+                Reg_and_Chassis_Fetch_button.config(state="enabled")
             finally:
                 Reg_update_button.config(state="enabled")
                 Chassis_update_button.config(state="enabled")
                 Reg_and_Chassis_Update_button.config(state="enabled")
                 Name_change_button.config(state="enabled")
                 verify_button.config(state="enabled")
+                Reg_fetch_button.config(state="enabled")
+                Chassis_fetch_button.config(state="enabled")
+                Reg_and_Chassis_Fetch_button.config(state="enabled")
 
             if Running_program == 0:
                 runing_programs_button.config(state="disabled")
@@ -659,6 +724,9 @@ def run_program():
                 Reg_and_Chassis_Update_button.config(state="disabled")
                 Name_change_button.config(state="disabled")
                 verify_button.config(state="disabled")
+                Reg_fetch_button.config(state="disabled")
+                Chassis_fetch_button.config(state="disabled")
+                Reg_and_Chassis_Fetch_button.config(state="disabled")
 
             # get Entry data
 
@@ -710,12 +778,18 @@ def run_program():
                 Reg_and_Chassis_Update_button.config(state="enabled")
                 Name_change_button.config(state="enabled")
                 verify_button.config(state="enabled")
+                Reg_fetch_button.config(state="enabled")
+                Chassis_fetch_button.config(state="enabled")
+                Reg_and_Chassis_Fetch_button.config(state="enabled")
             finally:
                 Reg_update_button.config(state="enabled")
                 Chassis_update_button.config(state="enabled")
                 Reg_and_Chassis_Update_button.config(state="enabled")
                 Name_change_button.config(state="enabled")
                 verify_button.config(state="enabled")
+                Reg_fetch_button.config(state="enabled")
+                Chassis_fetch_button.config(state="enabled")
+                Reg_and_Chassis_Fetch_button.config(state="enabled")
 
 
 

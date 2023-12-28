@@ -1,5 +1,4 @@
 from selenium import webdriver
-import requests
 import zipfile
 import wget
 import subprocess
@@ -12,16 +11,20 @@ from selenium.webdriver.chrome.service import Service
 
 
 # CHROMEDRIVER_PATH =  r""
-CHROMEDRIVER_FOLDER = r"./"
+CHROMEDRIVER_FOLDER = r"./_internal"
 LATEST_DRIVER_URL = "https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_STABLE"
 SOURCE_FILE = r"./chromedriver-win64/chromedriver.exe"
-DESTINATION_DIRECTORY = r"./"
+DESTINATION_DIRECTORY = r"./_internal"
 
 def Check_and_install_Updated_driver():
+    downloads_path = r"./"
+    file_location = f"{downloads_path}/LATEST_RELEASE_STABLE"
     Status =""
+    wget.download(LATEST_DRIVER_URL, out=downloads_path)
     def get_latest_driver():
-        downloads_path = Path.home() / "Downloads/LATEST_RELEASE_STABLE"
-        file_path = downloads_path
+
+        time.sleep(1)
+        file_path = file_location
 
         with open(file_path, 'r') as file:
             file_content = file.read()
@@ -32,7 +35,7 @@ def Check_and_install_Updated_driver():
 
     def download_latest_version(version_number):
         print("Attempting to download latest driver online......")
-        download_url = "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win64/chromedriver-win64.zip"
+        download_url = f"https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/{version_number}/win64/chromedriver-win64.zip"
         # "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win64/chromedriver-win64.zip"
         # download zip file
         latest_driver_zip = wget.download(download_url, out=CHROMEDRIVER_FOLDER)
@@ -60,19 +63,18 @@ def Check_and_install_Updated_driver():
         response = get_latest_driver()
         online_driver_version = response
         print(f"Latest online chromedriver version: {online_driver_version}")
+
         if local_driver_version == online_driver_version:
             return True
         else:
             os.remove(r"chromedriver.exe")
             download_latest_version(online_driver_version)
 
+
     check_driver()
 
     if check_driver() == True:
         Status = "The Driver Version is up-to-date"
         print("The Driver Version is up-to-date")
+        os.remove(file_location)
     return Status
-
-
-Status = Check_and_install_Updated_driver()
-print(Status)
