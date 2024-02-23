@@ -35,7 +35,7 @@ def Check_and_install_Updated_driver():
 
     def download_latest_version(version_number):
         print("Attempting to download latest driver online......")
-        download_url = f"https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/{version_number}/win64/chromedriver-win64.zip"
+        download_url = f"https:/storage.googleapis.com/chrome-for-testing-public/{version_number}/win64/chromedriver-win64.zip"
         # "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win64/chromedriver-win64.zip"
         # download zip file
         latest_driver_zip = wget.download(download_url, out=CHROMEDRIVER_FOLDER)
