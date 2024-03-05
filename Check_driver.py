@@ -11,10 +11,10 @@ from selenium.webdriver.chrome.service import Service
 
 
 # CHROMEDRIVER_PATH =  r""
-CHROMEDRIVER_FOLDER = r"./_internal"
+CHROMEDRIVER_FOLDER = r"./"
 LATEST_DRIVER_URL = "https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_STABLE"
 SOURCE_FILE = r"./chromedriver-win64/chromedriver.exe"
-DESTINATION_DIRECTORY = r"./_internal"
+DESTINATION_DIRECTORY = r"./"
 
 def Check_and_install_Updated_driver():
     downloads_path = r"./"
@@ -35,7 +35,7 @@ def Check_and_install_Updated_driver():
 
     def download_latest_version(version_number):
         print("Attempting to download latest driver online......")
-        download_url = f"https:/storage.googleapis.com/chrome-for-testing-public/{version_number}/win64/chromedriver-win64.zip"
+        download_url = f"https://storage.googleapis.com/chrome-for-testing-public/{version_number}/win64/chromedriver-win64.zip"
         # "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win64/chromedriver-win64.zip"
         # download zip file
         latest_driver_zip = wget.download(download_url, out=CHROMEDRIVER_FOLDER)
@@ -47,7 +47,7 @@ def Check_and_install_Updated_driver():
             # delete the zip file downloaded above
             os.remove(latest_driver_zip)
             os.rename(SOURCE_FILE, os.path.join(DESTINATION_DIRECTORY, os.path.basename(SOURCE_FILE)))
-            os.remove(f"./chromedriver-win64")
+            # os.remove(f"./chromedriver-win64")
         except Exception as error:
             print(error)
 
@@ -77,4 +77,7 @@ def Check_and_install_Updated_driver():
         Status = "The Driver Version is up-to-date"
         print("The Driver Version is up-to-date")
         os.remove(file_location)
+    else:
+        Status = "Error Downlaoding Driver"
     return Status
+
